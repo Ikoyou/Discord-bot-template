@@ -1,2 +1,2 @@
-# Discord-bot-template
- Free bot template for Discord
+# Discord_Botpython
+ a discord bot for python with feature Cogs
