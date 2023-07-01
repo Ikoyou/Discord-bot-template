@@ -50,6 +50,54 @@ exclude = [
     "-autoerotic_asphyxiation",
     "-video"]
 
+exclude_vid = [
+    "female",
+    "animated",
+    "-male/male",
+    "-gay",
+    "-gore",
+    "-vore",
+    "-watersports",
+    "-scat",
+    "-horsecock",
+    "-futanari",
+    "-monsterification",
+    "-identity_death",
+    "-muscle_growth",
+    "-transformation",
+    "-breast_expansion",
+    "-furry",
+    "-lip_expansion",
+    "-yiff",
+    "-young",
+    "-canine",
+    "-scalie",
+    "-reptile",
+    "-pokemon",
+    "-cyborg",
+    "-leporid",
+    "-diaper",
+    "-toddler",
+    "-baby",
+    "-birth",
+    "-pregnant",
+    "-bbw",
+    "-fart",
+    "-my_little_pony",
+    "-friendship_is_magic",
+    "-hasbro",
+    "-tentacle",
+    "-smell",
+    "-minecraft",
+    "-abuse",
+    "-roblox",
+    "-inflation",
+    "-eye_penetration",
+    "-feral",
+    "-giantess",
+    "-hanged",
+    "-autoerotic_asphyxiation"]
+
 r34Py = rule34Py()
 channel = PrivateInfo.nsfw_channel
 
@@ -90,9 +138,9 @@ class Nsfw(commands.Cog):
 
     # looks for video
     @commands.command()
-    async def vid(self, vhs, lookup):
+    async def vid(self, vhs, lookup="female"):
         list1 = [lookup]
-        list2 = exclude
+        list2 = exclude_vid
         list3 = list1 + list2
         result_random = r34Py.random_post(list3)
         await vhs.send(result_random.video)

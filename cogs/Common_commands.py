@@ -32,7 +32,7 @@ class Common(commands.Cog):
         await ctx.send(f"hello it is working now")
 
     @commands.command()
-    async def rules(self, rul):
+    async def nsfw_rules(self, rul):
         await rul.send(f"if you want to do a search you need to type * and say together followed by a space then your "
                        f"search tag, if you search tag has more than one word in it you need to put _ in the emtpy "
                        f"spaces otherwise it will only search the first word. ex: fire emblem would be fire_emblem "
@@ -46,8 +46,8 @@ class Common(commands.Cog):
     @commands.command()
     async def coinflip(self, cin):
         coin = random.randint(1, 2)
-        emojitails = self.bot.get_emoji(0)  # put your own emoji ID here
-        emojiheads = self.bot.get_emoji(0)  # put your own emoji ID here
+        emojitails = self.bot.get_emoji(0)
+        emojiheads = self.bot.get_emoji(0)
         if coin == 1:
             await cin.send(f"Heads {str(emojiheads)}")
         else:
@@ -66,18 +66,6 @@ class Common(commands.Cog):
             await ddr.send(f"Double! You Rolled: {str(dice1)} And {str(dice2)}")
         else:
             await ddr.send(f"You Rolled: {str(dice1)} And {str(dice2)}")
-
-    @commands.command()
-    async def weather(self, wwc, x="new york"):
-        location = f"Weather in {x} now"
-        url = f"https://www.google.com/search?q={location}"
-
-        req = requests.get(url)
-        soup = BeautifulSoup(req.text, "html.parser")
-
-        current_weather = soup.find("div", class_="BNeawe").text
-
-        await wwc.send(f"Your weather: {current_weather}")
 
     @commands.command()
     async def butthurt(self, mbh):
@@ -117,6 +105,18 @@ class Common(commands.Cog):
             channel = self.bot.get_channel(PrivateInfo.meme_channel)
             await channel.send("UWU We made a fucky Wucky!")
             self.meme_clock.start()
+
+    @commands.command()
+    async def help_commands(self, ctx):
+        helptext = "```"
+        for command in self.bot.commands:
+            helptext += f"{command}\n"
+        helptext += "```"
+        await ctx.send(f"if you want to use any of the commands need to type * and then the command that you want to "
+                       f"use, some commands can be used to search so if you want to do that then you need to add a "
+                       f"space then you can add your search tag, if you search tag has more than one word in it you "
+                       f"need to put _ in the emtpy spaces otherwise it will only search the first word. ex: fire  "
+                       f"emblem would be fire_emblem as a tag. Below is a List of our commands: \n{helptext}")
 
 
 async def setup(bot):
