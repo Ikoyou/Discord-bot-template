@@ -20,45 +20,5 @@ remove it from cogs and it should not be active.
 
 you start you command off with a *
 
-Common:
-  bitch         sparten navy seal copy pasta
-  butthurt      Butthurt form
-  coinflip      Flip a coin
-  doubleroll    Roll two dice
-  hello         Test command
-  help_commands Personal help command
-  meme          call up memes in a specfic channel
-  nsfw_rules    Rules for the Nsfw commands
-  pausememe     This is to pause the auto meme posting
-  roll          roll dice
-  startmeme     This is to start the auto meme posting
-  stopmeme      This is to stop the auto meme posting
-Fittness:
-  arm           Arm workouts
-  cardio        Cardio workouts
-  core          Core workouts
-  leg           Leg workouts
-Food:
-  food          Pick a random food
-  recipe        Gives a random recipe
-News:
-  get_news      Get top headline from BBC
-Nsfw:
-  breed         Vaporeon copy pasta
-  ksearch       Search tag for Konachan 
-  pausensfw     Pause r34 autopost
-  r34           Random r34 image
-  restartnsfw   restart r34 autopost
-  say           search a r34 tag
-  startnsfw     Start r34 autopost
-  stopnsfw      Stop r34 autopost
-  supersay      search 3 r34 tags
-  vid           search a r34 video
-Weather:
-  gweather      Google weather search
-  weather       Open weather search
-​No Category:
-  help          Shows this message
+![image](https://github.com/Ikoyou/Discord-bot-template/assets/138267141/e9611754-481e-4a68-902f-8e1892fa335c)
 
-Type *help command for more info on a command.
-You can also type *help category for more info on a category.
