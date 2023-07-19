@@ -1,6 +1,11 @@
-Token = ''  # for your bot token
-nsfw_channel = 0  # for the Nsfw channel ID
-meme_channel = 0  # for the meme channel ID
-Weather_token = ''  # open Weather token
+Token = ''
+nsfw_channel = 0
+meme_channel = 0
+Weather_token = ''
+nsfw_channel2 = 0
+News_API_Key = ''
+News_channel = 0
+Nsfw_role = 0
+Admin_role = 0
 
 # template channel ****.channel = your channel ID goes her

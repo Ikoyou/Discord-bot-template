@@ -30,7 +30,7 @@ class Fittness(commands.Cog):
         print(f"bot is ready!\n")
         print(f"fitness is ready! \n")
 
-    @commands.command()
+    @commands.command(brief="Core workouts", description="Pick a core workout from a list")
     async def core(self, exc):
         core1 = random.choice(corelist1)  # chooses a random work from a list
         core2 = random.choice(corelist2)  # chooses a random work from a list
@@ -43,7 +43,7 @@ class Fittness(commands.Cog):
 
     # Above is the making of the workout sentence you most turn number into string using the str() command
 
-    @commands.command()
+    @commands.command(brief="Leg workouts", description="Pick a leg workout from a list")
     async def leg(self, exl):
         legs1 = random.choice(leglist1)
         legs2 = random.choice(leglist2)
@@ -54,7 +54,7 @@ class Fittness(commands.Cog):
         await exl.send(
             str(legset1) + " " + legs1 + ", " + str(legset2) + " " + legs2 + ", " + str(legset3) + " " + legs3)
 
-    @commands.command()
+    @commands.command(brief="Arm workouts", description="Pick a arm workout from a list")
     async def arm(self, exa):
         arms1 = random.choice(armslist1)
         arms2 = random.choice(armslist2)
@@ -65,7 +65,7 @@ class Fittness(commands.Cog):
         await exa.send(
             str(armset1) + " " + arms1 + ", " + str(armset2) + " " + arms2 + ", " + str(armset3) + " " + arms3)
 
-    @commands.command()
+    @commands.command(brief="Cardio workouts", description="Pick a cardio workout from a list")
     async def cardio(self, exc):
         cardio1 = random.choice(cardiolist1)
         cardio2 = random.choice(cardiolist2)

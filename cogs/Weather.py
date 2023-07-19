@@ -30,7 +30,8 @@ class Weather(commands.Cog):
         print(f"bot is ready!\n")
         print("Weather is ready!\n")
 
-    @commands.command()
+    @commands.command(brief="Google weather search", description="search google for the weather of the location you "
+                                                                 "want")
     async def gweather(self, gwc, x="new york"):
         location = f"Weather in {x} now"
         url = f"https://www.google.com/search?q={location}"
@@ -39,7 +40,7 @@ class Weather(commands.Cog):
         current_weather = soup.find("div", class_="BNeawe").text
         await gwc.send(f"Your weather: {current_weather}")
 
-    @commands.command()
+    @commands.command(brief="Open weather search", description="search open weather for detail info")
     async def weather(self, wwc, x="new york"):
         base_url = "https://api.openweathermap.org/data/2.5/weather?appid="
         key = PrivateInfo.Weather_token

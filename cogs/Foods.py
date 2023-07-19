@@ -13,7 +13,7 @@ class Food(commands.Cog):
         print(f"bot is ready!\n")
         print(f"Food is ready! \n")
 
-    @commands.command()
+    @commands.command(brief="Gives a random recipe", description="Gives a random recipe out of 1600+ chooses")
     async def recipe(self, rrr):
         with open('recipes.json') as raw_data:
             load_data = raw_data.read()
@@ -24,7 +24,7 @@ class Food(commands.Cog):
                            f"\nInstructions: {str(random_data['Method'])}")
             raw_data.close()
 
-    @commands.command()
+    @commands.command(brief="Pick a random food", description="Pick a random food from a list of food")
     async def food(self, frr):
         fileobj = open("food.txt")
         lines = []

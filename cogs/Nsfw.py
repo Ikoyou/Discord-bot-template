@@ -1,6 +1,13 @@
+import logging
+import asyncio
+import booru
 from discord.ext import commands, tasks
 from rule34Py import rule34Py
 import PrivateInfo
+import datetime
+import random
+import json
+from booru import Konachan
 
 exclude = [
     "female",
@@ -48,7 +55,12 @@ exclude = [
     "-giantess",
     "-hanged",
     "-autoerotic_asphyxiation",
-    "-video"]
+    "-video",
+    "-decapitation",
+    "-ero_guro",
+    "-necrophilia",
+    "-asphyxiation",
+    "-rape"]
 
 exclude_vid = [
     "female",
@@ -96,7 +108,15 @@ exclude_vid = [
     "-feral",
     "-giantess",
     "-hanged",
-    "-autoerotic_asphyxiation"]
+    "-autoerotic_asphyxiation",
+    "-large_filesize",
+    "-extremely_large_filesize",
+    "-very_high_resolution",
+    "-decapitation",
+    "-ero_guro",
+    "-necrophilia",
+    "-asphyxiation",
+    "-rape"]
 
 r34Py = rule34Py()
 channel = PrivateInfo.nsfw_channel
@@ -110,23 +130,32 @@ class Nsfw(commands.Cog):
     async def rule34clock(self):
         channel1 = self.bot.get_channel(channel)
         result_random = r34Py.random_post(exclude)
+        time = datetime.datetime.now()
         await channel1.send(result_random.image)
+        logging.basicConfig(filename='taginfo.log', level=logging.INFO)
+        logging.info(f'{time} {result_random.tags}')
+        print(f"{time} {result_random.tags}")
 
     @commands.Cog.listener()
     async def on_ready(self):
         print(f"bot is ready!\n")
         self.rule34clock.start()
         print(f"Nsfw is ready! \n")
+        self.nsfwlitclock.start()
 
     # nsfw commands
     #   to search for a tag on rule 34
-    @commands.command()
+    @commands.command(brief="search a r34 tag", description="search a r34 tag excluding a list of tags")
+    @commands.has_role(PrivateInfo.Nsfw_role)
     async def say(self, rhs, lookup):
         list1 = [lookup]
         list2 = exclude
         list3 = list1 + list2
         result_random = r34Py.random_post(list3)
-        await rhs.send(result_random.image)
+        if rhs.channel.id == PrivateInfo.nsfw_channel:
+            await rhs.send(result_random.image)
+        else:
+            await rhs.send(" wrong channel")
 
     # responds to errors when someone puts in a bad tags
 
@@ -137,17 +166,34 @@ class Nsfw(commands.Cog):
                            "spaces of you search tag ex: fire emblem will need to be fire_emblem.")
 
     # looks for video
-    @commands.command()
+    @commands.command(brief="search a r34 video", description="search a r34 vid excluding a list of tags")
+    @commands.has_role(PrivateInfo.Nsfw_role)
     async def vid(self, vhs, lookup="female"):
         list1 = [lookup]
         list2 = exclude_vid
         list3 = list1 + list2
         result_random = r34Py.random_post(list3)
-        await vhs.send(result_random.video)
+        if vhs.channel.id == PrivateInfo.nsfw_channel:
+            await vhs.send(result_random.video)
+        else:
+            await vhs.send(" wrong channel")
+
+    @tasks.loop(minutes=15)
+    async def nsfwlitclock(self):
+        kone = Konachan()
+        img = await kone.search_image(query="breasts", block="loli", limit=500)
+        new1 = img.replace('[', '')
+        new2 = new1.replace(']', '')
+        new3 = new2.replace('\"', '')
+        final_list = list(new3.split(','))
+        random_img = random.choice(final_list)
+        channel_lit = self.bot.get_channel(PrivateInfo.nsfw_channel2)
+        await channel_lit.send(random_img)
 
     # Vaporeon copy-pasta but you can replace the name height and weight with a different value
 
-    @commands.command()
+    @commands.command(brief="Vaporeon copy pasta", description="Vaporeon copy pasta you can change name height and "
+                                                               "weight")
     async def breed(self, rsb, name="Vaporeon", hei="3”03’", wei="63.9"):
         await rsb.send(
             f"Hey guys, did you know that in terms of male human and female Pokémon breeding, {name} is the "
@@ -165,14 +211,35 @@ class Nsfw(commands.Cog):
             f"HP pool+Acid Armor means it can take cock all day, all shapes and sizes and still come for more")
 
     # do up to a 3 tag search
+    @commands.command(brief="Stop r34 autopost", description="Stop r34 autopost dont if issue happen")
+    @commands.has_role(PrivateInfo.Admin_role)
+    async def stopnsfw(self, srr):
+        self.rule34clock.cancel()
+        await srr.send("posting stopped!")
 
-    @commands.command()
+    @commands.command(brief="Start r34 autopost", description="Start r34 autopost dont if issue happen")
+    @commands.has_role(PrivateInfo.Admin_role)
+    async def startnsfw(self, srr):
+        self.rule34clock.start()
+        await srr.send("posting started!")
+
+    @commands.command(brief="Pause r34 autopost", description="Pause r34 autopost dont if issue happen")
+    @commands.has_role(PrivateInfo.Admin_role)
+    async def pausensfw(self, srr):
+        self.rule34clock.stop()
+        await srr.send("posting paused!")
+
+    @commands.command(brief="search 3 r34 tags", description="search 3 r34 tags with a excluded list")
+    @commands.has_role(PrivateInfo.Nsfw_role)
     async def supersay(self, rss, lookup1="female", lookup2="breasts", lookup3="1girls"):
         list1 = [lookup1, lookup2, lookup3]
         list2 = exclude
         list3 = list1 + list2
         result_random = r34Py.random_post(list3)
-        await rss.send(result_random.image)
+        if rss.channel.id == PrivateInfo.nsfw_channel:
+            await rss.send(result_random.image)
+        else:
+            await rss.send(" wrong channel")
 
     # responds to errors when someone puts in a bad tags
 
@@ -183,7 +250,8 @@ class Nsfw(commands.Cog):
                            "spaces of you search tag ex: fire emblem will need to be fire_emblem.")
 
     # start r34 autobot in case it stops
-    @commands.command()
+    @commands.command(brief="restart r34 autopost", description="restart r34 autopost dont if issue happen")
+    @commands.has_role(PrivateInfo.Admin_role)
     async def restartnsfw(self, rrs):
         self.rule34clock.start()
         await rrs.send("task restarted.")
@@ -198,14 +266,32 @@ class Nsfw(commands.Cog):
 
     # random rule 34 search
 
-    @commands.command()
+    @commands.command(brief="Random r34 image", description="random r34 image only do able in r34 channel")
+    @commands.has_role(PrivateInfo.Nsfw_role)
     async def r34(self, rhx):
         result_random = r34Py.random_post(exclude)
-        await rhx.send(result_random.image)
+        if rhx.channel.id == PrivateInfo.nsfw_channel:
+            await rhx.send(result_random.image)
+        else:
+            await rhx.send(" wrong channel")
 
     # send a random image to output in your Nsfw channel from rule 34
 
     # nsfw commands
+    @commands.command(brief="Search tag for Konachan ", description="Search tag for Konachan.")
+    @commands.has_role(PrivateInfo.Nsfw_role)
+    async def ksearch(self, krs, lookup="breasts"):
+        kone = Konachan()
+        img = await kone.search_image(query=lookup, block="loli", limit=500)
+        new1 = img.replace('[', '')
+        new2 = new1.replace(']', '')
+        new3 = new2.replace('\"', '')
+        final_list = list(new3.split(','))
+        random_img = random.choice(final_list)
+        if krs.channel.id == PrivateInfo.nsfw_channel2:
+            await krs.send(random_img)
+        else:
+            await krs.send(" wrong channel")
 
 
 async def setup(bot):
