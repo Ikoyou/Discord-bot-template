@@ -20,27 +20,45 @@ remove it from cogs and it should not be active.
 
 you start you command off with a *
 
+Common:
+  bitch         sparten navy seal copy pasta
+  butthurt      Butthurt form
+  coinflip      Flip a coin
+  doubleroll    Roll two dice
+  hello         Test command
+  help_commands Personal help command
+  meme          call up memes in a specfic channel
+  nsfw_rules    Rules for the Nsfw commands
+  pausememe     This is to pause the auto meme posting
+  roll          roll dice
+  startmeme     This is to start the auto meme posting
+  stopmeme      This is to stop the auto meme posting
+Fittness:
+  arm           Arm workouts
+  cardio        Cardio workouts
+  core          Core workouts
+  leg           Leg workouts
+Food:
+  food          Pick a random food
+  recipe        Gives a random recipe
+News:
+  get_news      Get top headline from BBC
+Nsfw:
+  breed         Vaporeon copy pasta
+  ksearch       Search tag for Konachan 
+  pausensfw     Pause r34 autopost
+  r34           Random r34 image
+  restartnsfw   restart r34 autopost
+  say           search a r34 tag
+  startnsfw     Start r34 autopost
+  stopnsfw      Stop r34 autopost
+  supersay      search 3 r34 tags
+  vid           search a r34 video
+Weather:
+  gweather      Google weather search
+  weather       Open weather search
+​No Category:
+  help          Shows this message
 
--arm: say weather then the location to get the weather
--roll: roll number up to 6 or if you put a number after it it becomes the rolls max
--restartnsfw: start up the nsfw bot if it crashes
--bitch: give the navy seal copy pasta
--cardio: to get cardio workout
--help: system generated help guide
--help_commands: editable help guide
--say: use to search r34
--gweather: say weather then the location to get the weather using google
--r34: random r34 pic
--weather: detailed weather search
--butthurt: buthurt form
--hello: says hi for testing
--vid: search r34 videos 
--core: to get core workout
--nsfw_rules: rules on how to use the say and super say command
--recipe: give you a random recipe with how to make the has over 1600 
--breed: give the vaporian copy pasta can you can replace the name height and weight with other items  default is the normal post ex: *breed john 6ft 150 
--meme: gets a random meme from reddit
--leg: to get leg workout
--coinflip: flips a coin you will need to add a emoji ID if you want a emoji to show
--supersay: use to search up to 3 tags on r34
--food: random food choose for when you can not find something
+Type *help command for more info on a command.
+You can also type *help category for more info on a category.
