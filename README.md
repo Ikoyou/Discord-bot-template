@@ -15,6 +15,7 @@ remove it from cogs and it should not be active.
  -fittness
  -Food
  -Weather
+ -News
 
 # Commands
 
