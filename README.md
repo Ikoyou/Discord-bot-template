@@ -11,7 +11,6 @@ remove it from cogs and it should not be active.
 # Current cogs
 
  -Common commands
- -Nsfw
  -fittness
  -Food
  -Weather
