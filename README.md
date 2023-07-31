@@ -21,5 +21,10 @@ remove it from cogs and it should not be active.
 
 you start you command off with a *
 
-![image](https://github.com/Ikoyou/Discord-bot-template/assets/138267141/e9611754-481e-4a68-902f-8e1892fa335c)
+![image](https://github.com/Ikoyou/Discord-bot-template/assets/138267141/b21b0fa8-309d-4818-9e98-8d87875b6876)
+![image](https://github.com/Ikoyou/Discord-bot-template/assets/138267141/3d391f37-8c71-48c8-a43e-89097339728e)
+
+
+
+
 
